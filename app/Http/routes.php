@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('files/', 'FileController@showFile');
 Route::get('taxilocation/{id}', 'TaxiLocationController@getLocation');
 Route::post('taxilocation', 'TaxiLocationController@setLocation');
 
