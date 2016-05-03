@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use Storage;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -27,19 +27,22 @@ class TaxiLocationController extends Controller
 
      public function setLocation(Request $request)
     {
+        $data = Request::json()->all();
+       
+        $loc= TaxiLocation::where('userid', '=', $data['userid'])->firstOrFail();
 
-        $loc= TaxiLocation::where('userid', '=', $request->userid)->firstOrFail();
+       
 
-        
+        $loc->locationX = $data['locationX'];
 
-        $loc->locationX = $request->locX;
-
-        $loc->locationY = $request->locY;
+        $loc->locationY = $data['locationY'];
 
         $loc->save();
         
 
         return Response::json($loc);
+
+
     }
 
 
